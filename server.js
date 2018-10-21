@@ -13,9 +13,20 @@ const complements = [
   "You've learned a lot of things, and that's pretty hard to do"
 ];
 
+const insults = [
+    "Your code is unoriginal and boring", 
+    "I would never admit to being such a code newbie!", 
+    "Your box isn't centered. Don't you understand CSS?"
+];
+
 function getRandomComplement() {
   const randomIndex = Math.floor(Math.random() * complements.length);
   return complements[randomIndex];
+}
+
+function getRandomInsult() {
+    const randomIndex = Math.floor(Math.random() * insults.length);
+    return insults[randomIndex];
 }
 
 const app = express();
@@ -31,6 +42,14 @@ app.get("/complement", function(req, res) {
     })
     .end();
 });
+
+app.get("/insult", function(req, res) {
+    res
+      .json({
+        insult: getRandomInsult()
+      })
+      .end();
+  });
 
 app.use("/public", express.static("./public"));
 
